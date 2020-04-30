@@ -1,0 +1,215 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<div class="row d-flex justify-content-center">
+    <div class="p-3 mb-2 bg-dark text-white col-5 ">
+      <div class="text-center">
+      {{cname}} Live Data
+    </div>
+    </div>
+    </div>
+    
+    <br><br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+        <div class="card" style="background-color:grey">
+            <div class="card-body text-center">
+              <h5 class="card-title" style="color:white">Total Confirmed Cases</h5>
+              <p class="card-text" style="color:yellow">{{ctotconf}}&nbsp &nbsp{{cnewconf}}<b>^</b></p>
+            </div>
+          </div>
+          </div>
+
+          <div class="col-3">
+            <div class="card" style="background-color:grey">
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color:white">Active Cases</h5>
+                  <p class="card-text" style="color:lightblue">{{ctotact}}</p>
+                </div>
+              </div>
+              </div>
+
+              <div class="col-3">
+                <div class="card" style="background-color:grey">
+                    <div class="card-body text-center">
+                      <h5 class="card-title" style="color:white">Recovered</h5>
+                      <p class="card-text" style="color:lightgreen">{{ctotreco}} &nbsp &nbsp    {{cnewreco}}<b>^</b></p>
+                    </div>
+                  </div>
+                  </div>
+                  
+                  <div class="col-3">
+                    <div class="card" style="background-color:grey">
+                        <div class="card-body text-center">
+                          <h5 class="card-title" style="color:white">Deaths</h5>
+                          <p class="card-text" style="color:rgb(218, 50, 58)">{{ctotdeath}} &nbsp &nbsp  {{cnewdeath}}<b>^</b></p>
+                        </div>
+                      </div>
+                      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <!-- <div class="col">
+        </div> -->
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <canvas id="myChart"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                    <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: {{ labels|safe }},
+                            datasets: [{
+                                label: 'Total cases confirmed',
+                                data: {{ confirm|safe }},
+                                // options: {
+                                //     responsive : true
+                                // }
+                                //aspectRatio: auto,
+                                backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                                    
+                                borderColor: 'rgba(255, 255, 0, 0)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            //responsive : true,
+                            maintainAspectRatio : false,
+                            aspectRatio: 1
+                        }
+                    });
+                    </script>
+                </div>
+            
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <canvas id="myChart1"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                    <script>
+                    var ctx = document.getElementById('myChart1').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: {{ labels|safe }},
+                            datasets: [{
+                                label: 'Active Cases',
+                                data: {{ active|safe }},
+                                // options: {
+                                //     responsive : true
+                                // }
+                                //aspectRatio: auto,
+                                backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                                    
+                                borderColor: 'rgba(0, 0, 255, 0)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            //responsive : true,
+                            maintainAspectRatio : false,
+                            aspectRatio: 1
+                        }
+                    });
+                    </script>
+                </div>
+            
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <canvas id="myChart3"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                    <script>
+                    var ctx = document.getElementById('myChart3').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: {{ labels|safe }},
+                            datasets: [{
+                                label: 'Recovered Cases',
+                                data: {{ recovered|safe }},
+                                // options: {
+                                //     responsive : true
+                                // }
+                                //aspectRatio: auto,
+                                backgroundColor: 'rgba(0, 255, 0, 0.5)',
+                                    
+                                borderColor: 'rgba(0, 255, 0, 0)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            //responsive : true,
+                            maintainAspectRatio : false,
+                            aspectRatio: 1
+                        }
+                    });
+                    </script>
+                </div>
+            
+            </div>
+        </div>
+        
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <canvas id="myChart4"></canvas>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                    <script>
+                    var ctx = document.getElementById('myChart4').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: {{ labels|safe }},
+                            datasets: [{
+                                label: 'Deaths',
+                                data: {{ deaths|safe }},
+                                // options: {
+                                //     responsive : true
+                                // }
+                                //aspectRatio: auto,
+                                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                                    
+                                borderColor: 'rgba(255, 0, 0, 0)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            //responsive : true,
+                            maintainAspectRatio : false,
+                            aspectRatio: 1
+                        }
+                    });
+                    </script>
+                </div>
+            
+            </div>
+        </div>
+        <!-- <div class="col">
+        </div> -->
+     </div>     
+</div>
+
+
+
+{% endblock %}

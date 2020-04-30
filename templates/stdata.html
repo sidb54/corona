@@ -1,0 +1,99 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+{% block content %}
+<br><br>
+<div class="row d-flex justify-content-center">
+<div class="p-3 mb-2 bg-dark text-white col-5 ">
+  <div class="text-center">
+  {{stname}} Live Data
+</div>
+</div>
+</div>
+
+<br><br>
+
+<div class="container ">
+  <div class="row justify-content-center">
+<div class="card mx-2" style="width: 18rem;">
+  <div class="card-header text-center text-dark">
+    Overall
+  </div>
+  <ul class="list-group list-group-flush">
+    <div class="text-center bg-primary">
+    <li class="list-group-item text-primary">Total Confirmed - {{totc}}</li>
+    <li class="list-group-item text-warning">Total Active - {{tota}}</li>
+    <li class="list-group-item text-success">Total Recoveries - {{totr}}</li>
+    <li class="list-group-item text-danger">Total Deaths - {{totd}}</li>
+
+  </div>
+  </ul>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header text-center text-dark">
+    Today<br>{{day}}<br>
+    {{dt}}
+  </div>
+  <ul class="list-group list-group-flush">
+    <div class="text-center bg-primary"> 
+    <li class="list-group-item text-warning">New Cases - {{nc}}</li>
+    <li class="list-group-item text-success">New Recoveries - {{nr}}</li>
+    <li class="list-group-item text-danger">New Deaths - {{nd}}</li>
+  </div>
+  </ul>
+</div>
+</div>
+</div>
+
+
+
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      
+    </div>
+    <div class="col-8">
+      <table class="table table-hover table-bordered table-striped table-dark w-auto">
+        <thead>
+          <tr>
+            <th scope="col" class = "text-center">District</th>
+            <th scope="col" class = "text-center">Total Cases</th>
+            <th scope="col" class = "text-center">Active</th>
+            <th scope="col" class = "text-center">New Cases</th>
+            <th scope="col" class = "text-center">Recovered</th>
+            <th scope="col" class = "text-center">New Recoveries</th>
+            <th scope="col" class = "text-center">Deaths</th>
+            <th scope="col" class = "text-center">New Deaths</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in districts %}
+            <tr>
+                
+                <td class = "text-center text-primary">{{i.0}}</a></td>
+                <td class = "text-center text-info">{{i.1}}</td>
+                <td class = "text-center bg-primary">{{i.2}}</td>
+                <td class = "text-center text-danger">{{i.3}}</td>
+                <td class = "text-center bg-success">{{i.4}}</td>
+                <td class = "text-center text-success">{{i.5}}</td>
+                <td class = "text-center bg-danger">{{i.6}}</td>
+                <td class = "text-center text-danger">{{i.7}}</td>
+                 
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+  
+</div>
+  
+{% endblock %}
+

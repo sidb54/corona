@@ -1,0 +1,87 @@
+$height: 200px;
+
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  min-height:100vh;
+  background:#222831;
+  color:rgba(#eeeeee, .2);
+  font-family:'Arial', sans-serif;
+}
+
+content{
+  padding-top:$height * 0.4;
+  border:10px solid rgba(#eeeeee, .2);
+  border-radius:15px;
+  position:relative;
+  z-index:50;
+  box-shadow:0 0 20px 0 rgba(#000, 0.1), inset 0 0 20px 0 rgba(#000, 0.1);
+  
+  &:after{
+    content:"Optimum";
+    position:absolute;
+    left:calc(100% + 20px);
+    top:$height * 0.4 + 13;
+    text-transform:uppercase;
+    font-weight:800;
+    letter-spacing:1.5pt;
+    font-size:.7em;
+  }
+}
+
+.wrapper{
+  height:$height;
+  display:flex;
+  align-items:flex-end;
+  position:relative;
+  padding:20px;
+  
+  &:before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:4px;
+    transform:translateY(-2px);
+    background:rgba(#eeeeee, .2);
+    top:20px;
+    left:0;
+    z-index:55;
+    box-shadow:0 0 20px 0 rgba(#000, 0.1);
+  }
+  
+  > div{
+    width:10px;
+    float:left;
+    margin-right:10px;
+    background:green;
+    border-radius:5px;
+    box-shadow:0 0 20px 0 rgba(#000, 0.1);
+    position:relative;
+    z-index:100;
+    animation: scaleUp .3s forwards;
+    transform:scaleY(0);
+    transform-origin:center bottom;
+    animation-timing-function: cubic-bezier(0.5, 0.21, 0.44, 1.255);
+    
+    @keyframes scaleUp{
+      to{
+        transform:scaleY(1);
+      }
+    }
+    $elements: 30;
+    @for $i from 1 through $elements {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.018}s;
+      }
+    }
+  }
+}
+
+p{
+  font-size:.9em;
+  width:400px;
+  text-align:center;
+  font-weight:600;
+}

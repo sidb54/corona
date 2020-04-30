@@ -1,0 +1,42 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<br><br>
+
+<div class="container-sm">
+<form action="/state/" method="GET">
+<table class="table table-hover table-bordered table-striped table-dark w-auto">
+    <thead>
+      <tr>
+        <th scope="col" class = "text-center">State</th>
+        <th scope="col" class = "text-center">Total Cases</th>
+        <th scope="col" class = "text-center">Active</th>
+        <th scope="col" class = "text-center">New Cases</th>
+        <th scope="col" class = "text-center">Recovered</th>
+        <th scope="col" class = "text-center">New Recoveries</th>
+        <th scope="col" class = "text-center">Deaths</th>
+        <th scope="col" class = "text-center">New Deaths</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr>
+            
+            <td class = "text-center text-primary"><button class="btn btn-secondary" input type="submit" value = '{{i.0}}' name='drop'>{{i.0}}</a></td>
+            <td class = "text-center text-info">{{i.1}}</td>
+            <td class = "text-center bg-primary">{{i.2}}</td>
+            <td class = "text-center text-danger">{{i.3}}</td>
+            <td class = "text-center bg-success">{{i.4}}</td>
+            <td class = "text-center text-success">{{i.5}}</td>
+            <td class = "text-center bg-danger">{{i.6}}</td>
+            <td class = "text-center text-danger">{{i.7}}</td>
+             
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</form>
+</div>
+{% endblock %}

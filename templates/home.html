@@ -1,0 +1,168 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
+    <link rel='stylesheet' href='https://codepen.io/dennisjohnsen/pen/xbhEm.less'><link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        /* Style the input field */
+        #myInput {
+          padding: 20px;
+          margin-top: -6px;
+          border: 0;
+          border-radius: 0;
+          background: #f1f1f1;
+        }
+
+        #myInput2 {
+          padding: 20px;
+          margin-top: -6px;
+          border: 0;
+          border-radius: 0;
+          background: #f1f1f1;
+        }
+    </style>
+    <title>Covid-19 Updates</title>
+  </head>
+
+  
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">HOME</a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+  
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="btn btn-outline-primary" href="/statesum/" role="button">Indian State Summary</a>
+        </li>
+        &nbsp &nbsp
+        <form action="/state/" method="GET">
+        <div class="dropdown text-center">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">State Wise Data
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu scrollable-menu">
+              <input class="form-control" id="myInput" type="text" placeholder="Search..">
+              {% for i in states %}
+              <button class="dropdown-item" input type="submit" value = '{{i}}' name='drop' style = "text-transform:uppercase;text-align: center;">{{i}}</a>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </form>
+
+        &nbsp &nbsp
+
+        <form action="/country/" method="GET">
+        <div class="dropdown uppercase text-center">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Country Wise Data
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu scrollable-menu">
+              <input class="form-control" id="myInput2" type="text" placeholder="Search..">
+              {% for i in counties %}
+              <button class="dropdown-item" input type="submit" value = '{{i}}' name='drop2' style = "text-transform:uppercase;text-align: center;">{{i}}</a>
+              {% endfor %}
+
+            </ul>
+          </div>
+        </form>
+         
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+    </div>
+    <div class="card">
+        <div class="card-body card-rotating text-center"><b>COVID-19 DATA</b></div>
+      </div>
+
+
+
+      
+      &nbsp &nbsp
+
+      <div class="badge badge-primary text-wrap" style="width: 8rem;">
+        Designed By SidB54
+      </div>
+      
+
+  </nav>
+
+  <body>
+    
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-12">
+            {% block content %}
+            {% for i in ll %}
+            <br><br>
+            <div class="container ">
+                <div class="row justify-content-center">
+              <div class="card mx-2" style="width: 18rem;">
+                <div class="card-header text-center text-dark">
+                  <b>Global</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <div class="text-center bg-primary">
+                  <li class="list-group-item text-primary">Total Confirmed - {{ed.TotalConfirmed}}</li>
+                  <li class="list-group-item text-warning">New Cases - {{ed.NewConfirmed}}</li>
+                  <li class="list-group-item text-success">Total Recoveries - {{ed.TotalRecovered}}</li>
+                  <li class="list-group-item text-danger">Total Deaths - {{ed.TotalDeaths}}</li>
+              
+                </div>
+                </ul>
+              </div>
+            {% endfor %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script  src="{static 'js/script3.js'}"></script>
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".dropdown-menu button").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
+        <script>
+            $(document).ready(function(){
+              $("#myInput2").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $(".dropdown-menu button").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+        </script>
+        
+    </body>
+
+    <!-- Footer -->
+
+  <!-- Footer -->
+</html>
+
